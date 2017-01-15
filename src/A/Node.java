@@ -3,8 +3,8 @@ package A;
 public class Node {
 	
 	private final Coordinates coordinates;
-	private int gValue;
-	private int hValue;
+	private double gValue;
+	private double hValue;
 	private Node parent;
 	
 	public Node(Coordinates coordinates) {
@@ -22,8 +22,7 @@ public class Node {
 	/*
 	 * Return F = G + H
 	 */
-	
-	public int getFValue() {
+	public double getFValue() {
 		return gValue + hValue;
 	}
 	
@@ -31,11 +30,11 @@ public class Node {
 		return coordinates;
 	}
 	
-	public void setHValue(int hValue) {
+	public void setHValue(double hValue) {
 		this.hValue = hValue;
 	}
 	
-	public void setGValue(int gValue) {
+	public void setGValue(double gValue) {
 		this.gValue = gValue;
 	}
 
