@@ -24,7 +24,7 @@ public class AStar {
 		
 		initialize(); // znajduje wêze³ pocz¹tkowy i koñcowy na mapie
 		
-		this.closedSet.add(this.startNode); //dodaje start nide do closed setu
+		this.closedSet.add(this.startNode); //dodaje start node do closed setu
 		addNodesToOpenSet(this.startNode); //metoda dodaje do open setu wszystkie pola, ktore s¹ wokó³ danego wêz³a
 		
 		Node closestNode = getClosestNodeFromOpenSet(); //z listy open set pobieramy wêze³, który ma najmniejsz¹ F value - jest najbli¿ej
@@ -67,25 +67,30 @@ public class AStar {
 	}
 	
 	private void addNodesToOpenSet (Node from) {
-		addNewNodeToOpenSet(from, from.getCoordinates().createNorth());
-		addNewNodeToOpenSet(from, from.getCoordinates().createEast());
-		addNewNodeToOpenSet(from, from.getCoordinates().createSouth());
-		addNewNodeToOpenSet(from, from.getCoordinates().createWest());
-		addNewNodeToOpenSet(from, from.getCoordinates().createNorthEast());
-		addNewNodeToOpenSet(from, from.getCoordinates().createNorthWest());
-		addNewNodeToOpenSet(from, from.getCoordinates().createSouthEast());
-		addNewNodeToOpenSet(from, from.getCoordinates().createSouthWest());
+		addNewNodeToOpenSet(from, from.getCoordinates().createNorth(), false);
+		addNewNodeToOpenSet(from, from.getCoordinates().createEast(), false);
+		addNewNodeToOpenSet(from, from.getCoordinates().createSouth(), false);
+		addNewNodeToOpenSet(from, from.getCoordinates().createWest(), false);
+		addNewNodeToOpenSet(from, from.getCoordinates().createNorthEast(), true);
+		addNewNodeToOpenSet(from, from.getCoordinates().createNorthWest(), true);
+		addNewNodeToOpenSet(from, from.getCoordinates().createSouthEast(), true);
+		addNewNodeToOpenSet(from, from.getCoordinates().createSouthWest(), true);
 	}
 	
-	private void addNewNodeToOpenSet(Node parent, Coordinates coordinates) {
+	private void addNewNodeToOpenSet(Node parent, Coordinates coordinates, boolean isDiagonal) {
 		int areaField = this.area[coordinates.getY()][coordinates.getX()];
 		
 		if (areaField != -2 && areaField != -1) {
 			Node node = new Node(coordinates);
 			
 			if (!this.closedSet.contains(node) && !this.openSet.contains(node)) {
+				if (isDiagonal) {
+					node.setGValue(Math.sqrt(2));
+				} else {
+					node.setGValue(1);
+				}
+				
 				node.setHValue(calculateDistanceToEndNode(coordinates));
-				node.setGValue(this.area[coordinates.getY()][coordinates.getX()]);
 				node.setParent(parent);
 				this.openSet.add(node);
 			}
