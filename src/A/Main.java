@@ -9,8 +9,6 @@ public class Main {
 	private static final String COMPLEX_AREA_FILE_PATH = "resources/complex_area.txt";
 	private static final String LABYRINTH_AREA_FILE_PATH = "resources/labyrinth_area.txt";
 	private static final String TWO_PATHS_AREA_1_FILE_PATH = "resources/two_paths_area_1.txt";
-	private static final String TWO_PATHS_AREA_2_FILE_PATH = "resources/two_paths_area_2.txt";
-	
 	
 	public static void main(String[] args) throws Exception {
 		findPath(EXAMPLE_AREA_FILE_PATH, "Prosta sciezka 1:");
@@ -18,7 +16,6 @@ public class Main {
 		findPath(COMPLEX_AREA_FILE_PATH, "Skomplikowana sciezka:");
 		findPath(LABYRINTH_AREA_FILE_PATH, "Labirynt:");
 		findPath(TWO_PATHS_AREA_1_FILE_PATH, "Dwie sciezki - krotsza droga jest bardziej optymalna:");
-		findPath(TWO_PATHS_AREA_2_FILE_PATH, "Dwie sciezki - dluzsza droga jest bardziej optymalna:");
 	}		
 	
 	private static void findPath(String filePath, String label) throws Exception {
